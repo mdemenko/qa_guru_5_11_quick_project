@@ -31,7 +31,6 @@ public class DriverHelper {
         return !getWebMobile().equals("");
     }
 
-
     public static String getWebRemoteDriver() {
         // https://%s:%s@selenoid.autotests.cloud/wd/hub/
         return String.format(getDriverConfig().webRemoteDriverUrl(),
@@ -60,7 +59,7 @@ public class DriverHelper {
     }
 
     public static void configureDriver() {
-        addListener("AllureSelenide", new AllureSelenide().screenshots(true).savePageSource(true));
+        addListener("AllureSelenide", new AllureSelenide());
 
         Configuration.browser = getDriverConfig().webBrowser();
         Configuration.browserVersion = getDriverConfig().webBrowserVersion();
@@ -86,7 +85,5 @@ public class DriverHelper {
 
         Configuration.browserCapabilities = capabilities;
 
-
     }
-
 }

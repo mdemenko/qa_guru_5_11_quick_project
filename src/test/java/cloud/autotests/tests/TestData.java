@@ -12,10 +12,6 @@ public class TestData {
         return getTestData().webUrl();
     }
 
-    public static String getApiUrl() {
-        return getTestData().apiUrl();
-    }
-
     public static String getUserLogin() {
         return getTestData().userLogin();
     }
