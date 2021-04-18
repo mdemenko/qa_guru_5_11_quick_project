@@ -20,7 +20,6 @@ public class TestBase {
 
         attachScreenshot("Last screenshot");
         attachPageSource();
-//        attachNetwork(); // todo
         attachAsText("Browser console logs", getConsoleLogs());
         if (isVideoOn()) attachVideo(sessionId);
 
