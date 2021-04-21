@@ -1,15 +1,22 @@
 package cloud.autotests.tests;
 
+import com.codeborne.selenide.CollectionCondition;
+import com.codeborne.selenide.ElementsCollection;
+import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.Story;
+import org.assertj.core.api.Assert;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import static com.codeborne.selenide.Condition.*;
-import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selectors.withText;
+import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.*;
 import static io.qameta.allure.Allure.step;
 import static io.qameta.allure.SeverityLevel.*;
@@ -31,12 +38,15 @@ public class MainPageTests extends TestBase {
             $("[name=search]").setValue("qa").pressEnter();
         });
         step("Search results are displayed", () -> {
-            $(byText("Пошук за запитом «qa»")).shouldBe(visible);
-            $(withText("Знайдено")).shouldBe(visible);
-
-            String[] searchResult = $(withText("Знайдено")).getText().split(" ");
-            int result = Integer.parseInt(searchResult[1]);
-            assertThat(result).isGreaterThan(0);
+            step("String for search is displayed", () -> {
+                $(byText("Пошук за запитом «qa»")).shouldBe(visible);
+                $(withText("Знайдено")).shouldBe(visible);
+            });
+            step("Search results are more than 0", () -> {
+                String[] searchResult = $(withText("Знайдено")).getText().split(" ");
+                int result = Integer.parseInt(searchResult[1]);
+                assertThat(result).isGreaterThan(0);
+            });
         });
     }
 
@@ -81,6 +91,52 @@ public class MainPageTests extends TestBase {
                 $(".icon--Github").shouldBe(visible).
                         shouldHave(attribute("href", "https://github.com/Dataart"));
             });
+        });
+    }
+
+    @Test
+    @Severity(CRITICAL)
+    @DisplayName("User can send CV")
+    void userCanSendCv() {
+        step("Open site", () ->  open("/"));
+        step("Click \"Надiслати резюме\"", () ->  $(".nav__resume-link").click());
+        step("Populate required fields", () -> {
+            $("#name-abstractCV").setValue("Alex");
+            $("#customSelect__location").click();
+            $(byText("Херсон")).click();
+            $("#email-abstractCV").setValue("alex.test@gmail.com");
+            $("#customSelect__specialization").click();
+            $(byText("QA")).click();
+            $("#file-abstractCV").uploadFromClasspath("example.doc");
+            $(".tooltip-handle").click();
+        });
+        step("\"Надiслати\" button is displayed and clickable", () ->
+                $("#submitButton-abstractCV").shouldBe(visible).shouldBe(enabled));
+    }
+
+    @Test
+    @Severity(MINOR)
+    @DisplayName("Skillotron section is displayed")
+    void scillotronIconIsDisplayed() {
+        step("Open site", () ->  open("/"));
+        step("Check scillotron section is displayed", () -> {
+            $("div.skillotron a").shouldBe(visible).
+                    shouldHave(attribute("href", "https://skillotron.com/"));
+        });
+    }
+
+    @Test
+    @Severity(NORMAL)
+    @DisplayName("User can view current QA vacancies")
+    void userCanViewQaVacancies() {
+        step("Open site", () ->  open("/"));
+        step("Click on QA vacancies tab", () -> $("[aria-controls=sectionQA]").click());
+        step("All proposed vacancies are for QA", () ->  {
+             $$(".jobs-list__title > a")
+                     .filterBy(visible)
+                     .excludeWith(cssClass("jobs-list__job--industry"))
+                     .texts()
+                     .forEach(el -> assertThat(el).contains("QA"));
         });
     }
 }
