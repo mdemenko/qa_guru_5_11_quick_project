@@ -1,22 +1,14 @@
 package cloud.autotests.tests;
 
-import com.codeborne.selenide.CollectionCondition;
-import com.codeborne.selenide.ElementsCollection;
-import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Severity;
-import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.Story;
-import org.assertj.core.api.Assert;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 import static com.codeborne.selenide.Condition.*;
-import static com.codeborne.selenide.Selectors.*;
+import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selectors.withText;
 import static com.codeborne.selenide.Selenide.*;
 import static io.qameta.allure.Allure.step;
 import static io.qameta.allure.SeverityLevel.*;
@@ -27,6 +19,7 @@ public class MainPageTests extends TestBase {
 
     @Test
     @Severity(NORMAL)
+    @Feature("Main page")
     @DisplayName("User can search on the site")
     void userCanSearchOnTheSite() {
         step("Open site", () -> {
@@ -52,6 +45,7 @@ public class MainPageTests extends TestBase {
 
     @Test
     @Severity(NORMAL)
+    @Feature("Main page")
     @DisplayName("City of development can be selected")
     void cityOfDevelopmentCanBeSelected() {
         step("Open site", () ->  open("/"));
@@ -67,6 +61,7 @@ public class MainPageTests extends TestBase {
 
     @Test
     @Severity(MINOR)
+    @Feature("Main page")
     @DisplayName("Social media icons and links are displayed")
     void socialMediaIconsAreDisplayed() {
         step("Open site", () ->  open("/"));
@@ -96,6 +91,7 @@ public class MainPageTests extends TestBase {
 
     @Test
     @Severity(CRITICAL)
+    @Feature("Send CV")
     @DisplayName("User can send CV")
     void userCanSendCv() {
         step("Open site", () ->  open("/"));
@@ -116,6 +112,7 @@ public class MainPageTests extends TestBase {
 
     @Test
     @Severity(MINOR)
+    @Feature("Main page")
     @DisplayName("Skillotron section is displayed")
     void scillotronIconIsDisplayed() {
         step("Open site", () ->  open("/"));
@@ -127,6 +124,7 @@ public class MainPageTests extends TestBase {
 
     @Test
     @Severity(NORMAL)
+    @Feature("Search vacancies")
     @DisplayName("User can view current QA vacancies")
     void userCanViewQaVacancies() {
         step("Open site", () ->  open("/"));
@@ -137,6 +135,20 @@ public class MainPageTests extends TestBase {
                      .excludeWith(cssClass("jobs-list__job--industry"))
                      .texts()
                      .forEach(el -> assertThat(el).contains("QA"));
+        });
+    }
+
+    @Test
+    @Severity(MINOR)
+    @Feature("Main page")
+    @DisplayName("Company information can be viewed")
+    void companyInformationCanBeViewed() {
+        step("Open site", () ->  open("/"));
+        step("Click on DataArt button", () ->  $(byText("DataArt")).click());
+        step("Select \"Про DataArt\" menu item ", () ->  $("[title=\"Про DataArt\"]").click());
+        step("Company information page is displayed", () -> {
+            assertThat(title()).isEqualTo("Про DataArt");
+            $("h1.feature__heading").shouldHave(text("Про DataArt"));
         });
     }
 }
