@@ -14,7 +14,6 @@ import static io.qameta.allure.Allure.step;
 import static io.qameta.allure.SeverityLevel.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
-@Story("Main page tests")
 public class MainPageTests extends TestBase {
 
     @Test
