@@ -1,4 +1,6 @@
-## Simple example UI automation testing for https://dataart.com.ua/
+## UI automation testing for https://dataart.com.ua/
+
+#### *Quick project example with infrastructure: Selenide UI test with Allure report, remote run on Selenoid and push notifications to Telegram*
 
 ### Technology Stack
 
@@ -17,3 +19,9 @@
 
 ### Video
 ![Video](src/test/resources/img/video.gif)
+
+### Jenkins
+https://jenkins.autotests.cloud/job/c05-notoriousMax-example
+
+### Telegram
+![Telegram](src/test/resources/img/telegram.png)
