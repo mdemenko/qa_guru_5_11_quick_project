@@ -21,12 +21,11 @@ public class MainPageTests extends TestBase {
     @Feature("Main page")
     @DisplayName("User can search on the site")
     void userCanSearchOnTheSite() {
-        step("Open site", () -> {
-            open("/");
-            $("div.nav__logo a").shouldHave(attribute("title","DataArt"));
-        });
+        step("Open site", () ->
+            open("/")
+        );
         step("Enter search string", () -> {
-            $(".icon--svg__search").shouldBe(visible).click();
+            $("#searchToggle").shouldBe(visible).click();
             $("[name=search]").setValue("qa").pressEnter();
         });
         step("Search results are displayed", () -> {
@@ -47,9 +46,10 @@ public class MainPageTests extends TestBase {
     @Feature("Main page")
     @DisplayName("City of development can be selected")
     void cityOfDevelopmentCanBeSelected() {
-        step("Open site", () ->  open("/"));
+        step("Open site", () ->
+            open("/")
+        );
         step("Select city of development", () -> {
-            $("#citySelect__title").shouldBe(visible).shouldHave(text("Центри розробки"));
             $("#citySelect__title").hover();
             $("[data-ga-label=Odessa]").click();
         });
@@ -63,7 +63,9 @@ public class MainPageTests extends TestBase {
     @Feature("Main page")
     @DisplayName("Social media icons and links are displayed")
     void socialMediaIconsAreDisplayed() {
-        step("Open site", () ->  open("/"));
+        step("Open site", () ->
+                open("/")
+        );
         step("Check social media icons are displayed", () -> {
             step("Facebook icon is displayed",() -> {
             $(".icon--facebook").shouldBe(visible).
@@ -93,8 +95,12 @@ public class MainPageTests extends TestBase {
     @Feature("Send CV")
     @DisplayName("User can send CV")
     void userCanSendCv() {
-        step("Open site", () ->  open("/"));
-        step("Click \"Надiслати резюме\"", () ->  $(".nav__resume-link").click());
+        step("Open site", () ->
+                open("/")
+        );
+        step("Click \"Надiслати резюме\"", () ->
+            $(".nav__resume-link").click()
+        );
         step("Populate required fields", () -> {
             $("#name-abstractCV").setValue("Alex");
             $("#customSelect__location").click();
@@ -114,7 +120,9 @@ public class MainPageTests extends TestBase {
     @Feature("Main page")
     @DisplayName("Skillotron section is displayed")
     void scillotronIconIsDisplayed() {
-        step("Open site", () ->  open("/"));
+        step("Open site", () ->
+                open("/")
+        );
         step("Check scillotron section is displayed", () -> {
             $("div.skillotron a").shouldBe(visible).
                     shouldHave(attribute("href", "https://skillotron.com/"));
@@ -126,8 +134,12 @@ public class MainPageTests extends TestBase {
     @Feature("Search vacancies")
     @DisplayName("User can view current QA vacancies")
     void userCanViewQaVacancies() {
-        step("Open site", () ->  open("/"));
-        step("Click on QA vacancies tab", () -> $("[aria-controls=sectionQA]").click());
+        step("Open site", () ->
+                open("/")
+        );
+        step("Click on QA vacancies tab", () ->
+            $("[aria-controls=sectionQA]").click()
+        );
         step("All proposed vacancies are for QA", () ->  {
              $$(".jobs-list__title > a")
                      .filterBy(visible)
@@ -142,8 +154,10 @@ public class MainPageTests extends TestBase {
     @Feature("Main page")
     @DisplayName("Company information can be viewed")
     void companyInformationCanBeViewed() {
-        step("Open site", () ->  open("/"));
-        step("Click on DataArt button", () ->  $(byText("DataArt")).click());
+        step("Open site", () ->
+                open("/")
+        );
+        step("Click on DataArt navigation menu item", () ->  $(byText("DataArt")).click());
         step("Select \"Про DataArt\" menu item ", () ->  $("[title=\"Про DataArt\"]").click());
         step("Company information page is displayed", () -> {
             assertThat(title()).isEqualTo("Про DataArt");

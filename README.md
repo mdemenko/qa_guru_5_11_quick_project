@@ -1,27 +1,27 @@
 ## UI automation testing for https://dataart.com.ua/
 
-#### *Quick project example with infrastructure: Selenide UI test with Allure report, remote run on Selenoid and push notifications to Telegram*
+#### *Quick project example with infrastructure: Selenide UI tests with Allure report, remote run on Selenoid and push notifications to Telegram*
 
 ### Technology Stack
 
-![Java](src/test/resources/img/icons/Java.png)
-![Gradle](src/test/resources/img/icons/Gradle.png)
-![JUnit5](src/test/resources/img/icons/JUnit5.png)
-![Selenide](src/test/resources/img/icons/Selenide.png)
-![Allure_Report](src/test/resources/img/icons/Allure_Report.png)
-![Jenkins](src/test/resources/img/icons/Jenkins.png)
-![Selenoid](src/test/resources/img/icons/Selenoid.png)
+![Java](images/icons/Java.png)
+![Gradle](images/icons/Gradle.png)
+![JUnit5](images/icons/JUnit5.png)
+![Selenide](images/icons/Selenide.png)
+![Allure_Report](images/icons/Allure_Report.png)
+![Jenkins](images/icons/Jenkins.png)
+![Selenoid](images/icons/Selenoid.png)
 
 ### Allure report
-![Allure](src/test/resources/img/allure1.png)
-![Allure](src/test/resources/img/allure2.png)
-![Allure](src/test/resources/img/allure3.png)
+![Allure](images/allure1.png)
+![Allure](images/allure2.png)
+![Allure](images/allure3.png)
 
 ### Video
-![Video](src/test/resources/img/video.gif)
+![Video](images/video.gif)
 
 ### Jenkins
 https://jenkins.autotests.cloud/job/c05-notoriousMax-example
 
 ### Telegram
-![Telegram](src/test/resources/img/telegram.png)
+![Telegram](images/telegram.png)
